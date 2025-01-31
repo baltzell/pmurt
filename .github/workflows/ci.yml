@@ -1,4 +1,4 @@
-name: Coatjava-CI
+name: pmurt
 
 on:
   pull_request:
@@ -24,11 +24,7 @@ jobs:
   build:
     strategy:
       fail-fast: true
-      matrix:
-        runner:
-          - ubuntu-latest
-          - macos-latest
-    runs-on: ${{ matrix.runner }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK
@@ -40,7 +36,7 @@ jobs:
         run: echo doggies > coatjava.tar.gz
       - uses: actions/upload-artifact@v4
         with:
-          name: build_${{ matrix.runner }}
+          name: coatjava-tarball
           retention-days: 1
           path: coatjava.tar.gz
 
@@ -52,13 +48,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Download
         uses: actions/download-artifact@v4
-        with:
-          name: coatjava.tar.gz
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: coatjava.tar.gz
+          name: coatjava.tar.gz
 
   final:
     needs:
