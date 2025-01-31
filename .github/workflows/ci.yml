@@ -52,7 +52,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: coatjava.tar.gz
+          files: coatjava.tar.gz
+        env:
+          GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
 
   final:
     needs:
