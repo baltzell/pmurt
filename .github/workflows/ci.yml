@@ -38,7 +38,7 @@ jobs:
         with:
           name: coatjava-tarball
           retention-days: 1
-          path: coatjava.tar.gz
+          path: coatjava-tarball/coatjava.tar.gz
 
   release:
     needs: [ build ]
@@ -50,8 +50,6 @@ jobs:
         uses: actions/download-artifact@v4
       - name: See
         run: ls -l && ls -l coatjava-tarball
-      - name: Pee
-        run: unzip coatjava-tarball
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
