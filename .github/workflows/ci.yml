@@ -36,7 +36,6 @@ jobs:
         run: echo doggies > coatjava.tar.gz
       - uses: actions/upload-artifact@v4
         with:
-          name: build_ubuntu-latest
           retention-days: 1
           path: coatjava.tar.gz
 
